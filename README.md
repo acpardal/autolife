@@ -1,48 +1,31 @@
 # AutoLife the X-Ray of your car
 
-
-
 ## License
-
-
 
 GPL (see LICENSE)
 
-
-
 ## Installation
 
+Install Git 
+run `git clone clone https://github.com/acpardal/autolife`
 
+Install embark with commands:
+```console
+npm install -g embark
+npm install`
+```
 
-Install [Git] https://github.com/acpardal/autolife
+### on the console 1 run:
 
-
-
-Install `npm install -g embark`
-
-`npm install`
-
-
-
-# on the console 1 run:
-
-```terminal
-
+```console
 embark simulator
-
 ```
+### on the console 2 run:
 
-
-
-# one the consolre 2 run:
-
-```terminal
-
+```console
 embark run
-
 ```
-
-
+# Objectives of the project
 
 This project aims to register all the information about a vehicle during its lifecycle (maintenance, accidents, recalls, etc.).
 
@@ -62,10 +45,9 @@ With the control of the vehicle owner, third parties will be able to query the b
 
 
 
-Technical Details:
+# Technical Details:
 
 Smart Contract VehicleFactory creates Vehicles and assigns them to an Address.
 
 Owner can transfer ownership to someone (in future should be a change of token between owner wallets).
-
 
