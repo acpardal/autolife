@@ -1,9 +1,10 @@
 <template>
   <div>
+      <h3 class="center">OEM View</h3>
       <div id="queryBalance">
         <label>Mercedes Wallet Address <span>{{oemAddress}}</span></label>
 
-        <h1>List of created Vehicles</h1>
+        <h2>List of created Vehicles</h2>
         <button type="submit" class="btn btn-primary" @click="getListOfVehicles()">Refresh</button>
         <ul class="list-group">
           <li class="list-group-item" v-for="vehicle in listOfVehicles" :key="vehicle.addr">

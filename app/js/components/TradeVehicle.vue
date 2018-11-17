@@ -2,7 +2,7 @@
 
   <div class="hello">
     <div class="container">
-      <h1>Change Owner</h1>
+      <h3 class="center">OEM View</h3>
       <div>
         <div>
           <label>Mercedes Wallet Address <span>{{oemAddress}}</span></label>

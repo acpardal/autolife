@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h3 class="center">Welcome to Mobility Hack Lisbon!</h3>
+      <h3 class="center">OEM View</h3>
       <div id="queryBalance">
         <label>Mercedes Wallet Address <span>{{oemAddress}}</span></label>
         <!-- <label>Vehicle buyer Wallet Address <span>{{vehicleBuyerAddress}}</span></label> -->
