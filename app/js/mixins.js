@@ -22,6 +22,7 @@ let myMixin = {
       vehicle.vehicleOwner = await VehicleContract.methods._owner().call();
       vehicle.numWheels = await VehicleContract.methods._numWheels().call();
       vehicle.vehicleParts = await VehicleContract.methods.getParts().call();
+      vehicle.recall = await VehicleContract.methods._recall().call();
       return vehicle;
     },
   }

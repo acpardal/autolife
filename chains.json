@@ -252,6 +252,34 @@
       "0x60086dbcfa0fc7f4e64a141fa7091c4b2f8f6f6bdd3759c3fafc5ec5ee6829d0": {
         "name": "owned",
         "address": "0xd3B45f085746e4D5044B49fc10017946B48BF00c"
+      },
+      "0x2f1a621617ee868ee719661e651a9ac7ba9fd732b1a2833a3ac2c50286315ffa": {
+        "name": "Vehicle",
+        "address": "0xD5A353b5BFd1f1b1FE087a5a76C6Ee716a53B0D1"
+      },
+      "0x6b0a2ea0f4a942b6d075d804f4d47d26c9e074bf25d750a3e6d8e34281c71d70": {
+        "name": "VehicleFactory",
+        "address": "0x6F31f18Dd35673477c90d0371868c22151459910"
+      },
+      "0x429a396eca344b5cb158db09a8de30938086d39231a35250981dfa2093d9f59c": {
+        "name": "Vehicle",
+        "address": "0xEDBDcA9E191030fb2a1ef21c3782FA398DC1a15f"
+      },
+      "0x4ed26e2caddac141d041231d4b3da14f555cd9aeb00748c0c1d7a4b87a373c3f": {
+        "name": "VehicleFactory",
+        "address": "0xb36D0C113d636fAa6c8E1E7845a9770b6996C93A"
+      },
+      "0x16d54c6299acb34b06f64543cfdbb1583ba0ba8de484531efa6022a97d4e2590": {
+        "name": "Vehicle",
+        "address": "0x8E1ec8EFEaD5F9160f3E5fdE2d4a40aa41e5CB46"
+      },
+      "0xd9ed751a87e7bc54ec546da0cb19cb2b8934f7978d9176e2844211dcd30659dd": {
+        "name": "VehicleFactory",
+        "address": "0x3C344D4C69A29e2B359CcB9FDA03b1B4f82FB268"
+      },
+      "0x5fe1c11565e3ba2f97103432e25826964c59fababa3ddfaee036b7342e5df71e": {
+        "name": "VehicleFactory",
+        "address": "0xfE5664241ce7D3da7B3469A450Ae3d96766E19A8"
       }
     }
   }

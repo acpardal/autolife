@@ -1,20 +1,10 @@
 <template>
   <div>
-      <h3>Welcome to Embark!</h3>
       <div id="queryBalance">
         <label>Mercedes Wallet Address <span>{{oemAddress}}</span></label>
-        <!-- <label>Vehicle buyer Wallet Address <span>{{vehicleBuyerAddress}}</span></label> -->
-
-        <form>
-          <div class="form-group">
-            <label for="inputVIN">Create Vehicle with VIN</label>
-            <input type="number" class="form-control" id="inputVIN" placeholder="enter VIN: e.g 123" v-model="inputVIN">
-          </div>
-          <button type="submit" class="btn btn-primary" @click.prevent.stop="createVehicle()">Create Vehicle</button>
-        </form>
 
         <h1>List of created Vehicles</h1>
-        <button type="submit" class="btn btn-primary" @click.prevent.stop="getListOfVehicles()">Refresh</button>
+        <button type="submit" class="btn btn-primary" @click="getListOfVehicles()">Refresh</button>
         <ul class="list-group">
           <li class="list-group-item" v-for="vehicle in listOfVehicles" :key="vehicle.addr">
             <p>
@@ -23,7 +13,10 @@
             <p>
               <label>Vehicle Owner <span>{{vehicle.vehicleOwner}}</span></label>
             </p>
-            <button v-if="vehicle.vehicleOwner === oemAddress" type="submit" class="btn btn-primary" @click.prevent.stop="changeOwner(vehicle)">Change Owners of this Vehicle</button>
+            <p>
+              <label>Recall <span>{{vehicle.recall}}</span></label>
+            </p>
+            <button type="submit" class="btn btn-primary" @click="toggleRecall(vehicle)">Change Vehicle Recall</button>
           </li>
         </ul>
       </div>
@@ -83,24 +76,13 @@ export default {
       'setVehicleOwner',
       'setVehicleAddress'
     ]),
-    toogleRecall() {
+    toggleRecall(vehicle) {
       let {oemAddress, vehicleBuyerAddress, inputVIN, inputColor, inputNumWheels} = this;
       let vehicleContract = Vehicle.clone();
-      vehicleContract.options.address = this.vehicleAddress;
-      Vehicle.methods.toggle(inputVIN, [1,2], inputColor, inputNumWheels, oemAddress)
+      vehicleContract.options.address = vehicle.addr;
+      vehicleContract.methods.toggleRecall()
       .send({from: ''+oemAddress, gas:5000000})
       .on('receipt', async (receipt) => {
-
-          let vehicleAddress = receipt.events.CreateVehicle.returnValues.vehicle;
-          this.setVehicleAddress(vehicleAddress);
-          
-          let vehicle = await this.getVehicle(vehicleAddress);
-          this.VIN = vehicle.VIN;
-          this.color = vehicle.color;
-          this.setVehicleOwner(vehicle.vehicleOwner);
-          this.numWheels = vehicle.numWheels;
-          this.vehicleParts = vehicle.vehicleParts;
-          
           this.getListOfVehicles();
       });
     },

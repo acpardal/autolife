@@ -2,8 +2,6 @@
 
   <div class="hello">
     <div class="container">
-      <h3>Welcome to Embark!</h3>
-
       <h1>Change Owner</h1>
       <div>
         <div>

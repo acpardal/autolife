@@ -5,8 +5,19 @@ contract Vehicle {
     string public _color;
     string public _numWheels;
     address public _owner;
+    bool public _recall = false;
+    address public _oemAddress;
 
     event Transfer(address indexed from, address indexed to);
+    event ToggleRecall(bool actual);
+
+    modifier onlyOEM() {
+        require(
+            msg.sender == _oemAddress,
+            "Only owner can call this."
+        );
+        _;
+    }
 
     constructor (uint VIN, uint[] vehicleParts, string color, string numWheels, address owner) public {
         _VIN = VIN;
@@ -14,6 +25,7 @@ contract Vehicle {
         _color = color;
         _numWheels = numWheels;
         _owner = owner;
+        _oemAddress = tx.origin;
     }
 
     function transfer(address to) public returns (bool ok) {
@@ -26,5 +38,10 @@ contract Vehicle {
 
     function getParts() public view returns (uint[]) { 
         return _vehicleParts;
+    }
+
+    function toggleRecall() public onlyOEM {
+        _recall = !_recall;
+        emit ToggleRecall(_recall);
     }
 }
