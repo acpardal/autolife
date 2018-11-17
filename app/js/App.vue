@@ -1,7 +1,17 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <div class="container">
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <router-link tag="a" class="nav-link" to="/">Create Vehicle</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link tag="a" class="nav-link" to="/trade">Change Owner</router-link>
+        </li>
+      </ul>
+      <img src="./assets/logo.png">
+      <router-view/>
+    </div>
   </div>
 </template>
 

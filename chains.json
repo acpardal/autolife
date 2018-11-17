@@ -176,6 +176,62 @@
       "0x60086dbcfa0fc7f4e64a141fa7091c4b2f8f6f6bdd3759c3fafc5ec5ee6829d0": {
         "name": "owned",
         "address": "0xd3B45f085746e4D5044B49fc10017946B48BF00c"
+      },
+      "0x8991d7356605b18a0d53de3c5ecc5222441fae24bbc510700f8a16f93b16642d": {
+        "name": "Vehicle",
+        "address": "0x98A555767741F18672E1C8df3c1B25e2c33cD3B5"
+      },
+      "0x8de1d26b45bd378af39dfe8a225e61f55c7666da31e4f5751aad6e77deab9864": {
+        "name": "VehicleFactory",
+        "address": "0x58128a4147b599dE938D2D258eaB6951d15D7f63"
+      },
+      "0xa563a52b20944ecdabb27ae6e09c8ff58f23c1b4594e50407c474b5e6a5f13ea": {
+        "name": "VehicleFactory",
+        "address": "0xf6916D9FE593ca56B9897c7B58ff9a643823C984"
+      },
+      "0xe0c3ae2a1086b54c9ffd227575efce01881dd218b02d24cb08ecb27863d89443": {
+        "name": "Vehicle",
+        "address": "0xed34CcBcD63282553008291DdBC1714DCBeaD6Eb"
+      },
+      "0x3ad6e5b47b7bef0acccee4858dbb81c608695b958c809422c2edf7d644e2bcf8": {
+        "name": "VehicleFactory",
+        "address": "0xFa5F22f565bCf4973174C89F5d0F6C6e5cD9eB04"
+      },
+      "0xf85d01b94c5874d18b1e0b8665d6c3600527fc5c1c0368d09ca2f986389a2314": {
+        "name": "Vehicle",
+        "address": "0x6F7023C9eCcBb70b89D957e6C0c2Fc3a606dB484"
+      },
+      "0x53bf304056818b2ab1db8652819ca3f94cfd06989656ceefc24eeacf81392b69": {
+        "name": "VehicleFactory",
+        "address": "0x1502B8Ba3CB097aBc545CBBc4e4cd0F47f60986E"
+      },
+      "0xecf267c24ae71e2dc0b8666e8ddd351306bd5c0b206e9e9b62e96f4b8ed8c3cd": {
+        "name": "VehicleFactory",
+        "address": "0xD5A353b5BFd1f1b1FE087a5a76C6Ee716a53B0D1"
+      },
+      "0x406a3cb87f7655dc65f4b3984ab6da522b165cdf10e8aeaf948400f843e2b8c5": {
+        "name": "VehicleFactory",
+        "address": "0xEDBDcA9E191030fb2a1ef21c3782FA398DC1a15f"
+      },
+      "0xc6c14fc90b15b624f69369bf882925112aa5752efd4b09d71e2d570e79df38a3": {
+        "name": "VehicleFactory",
+        "address": "0xDf020Fda4f1a858b75f6c2C634ff0FE6103E2430"
+      },
+      "0x01d32642b4bde163f4f5bf7ad159839fbfdaa79b0e0163f94ac2913f7ca743ec": {
+        "name": "VehicleFactory",
+        "address": "0xFcEac2f7B08A8003F6158d48CCff871eA22FAC3F"
+      },
+      "0xdd58ebc64de26ce6c7a64f8585754aa7a95a7581d21f75442bfa779547771d41": {
+        "name": "Vehicle",
+        "address": "0xD04E7d61BdD2bCe251aCCBd7ADfD0B70C468F085"
+      },
+      "0x86990dd12633de3fbbb1db55af6f6799fc465fc893ac4dec5a1ae0fd17b4bd48": {
+        "name": "VehicleFactory",
+        "address": "0x1411f7d8103B89Ec6100788254528bEB004c95a0"
+      },
+      "0x70a515473e5f6e869d7ff8f6efc54a17c1f3e1511550d582b5f32cc788168dcd": {
+        "name": "VehicleFactory",
+        "address": "0xb6562aAa1894815afac3FBfca4307a754D903fB1"
       }
     }
   }

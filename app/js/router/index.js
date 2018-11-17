@@ -1,15 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '../components/HelloWorld.vue'
+import CreateVehicle from '../components/CreateVehicle.vue'
+import TradeVehicle from '../components/TradeVehicle.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  linkExactActiveClass: 'active',
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'CreateVehicle',
+      component: CreateVehicle
+    },
+    {
+      path: '/trade',
+      name: 'TradeVehicle',
+      component: TradeVehicle
     }
   ]
 })
