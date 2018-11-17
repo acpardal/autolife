@@ -10,38 +10,9 @@
             <label for="inputVIN">Create Vehicle with VIN</label>
             <input type="number" class="form-control" id="inputVIN" placeholder="enter VIN: e.g 123" v-model="inputVIN">
           </div>
-          <div class="form-group">
-            <label for="inputColor">Color</label>
-            <input type="text" class="form-control" id="inputColor" placeholder="enter string color" v-model="inputColor">
-          </div>
-          <div class="form-group">
-            <label for="inputNumWheels">Number of Wheels</label>
-            <input type="number" class="form-control" id="inputColor" placeholder="enter how much wheels" v-model="inputNumWheels">
-          </div>
           <button type="submit" class="btn btn-primary" @click.prevent.stop="createVehicle()">Create Vehicle</button>
         </form>
 
-        <h1>Results</h1>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <label>Vehicle Address <span>{{vehicleAddress}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>VIN <span>{{VIN}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Color <span>{{color}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Number of Wheels <span>{{numWheels}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Parts <span>{{vehicleParts}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Owner wallet address <span>{{vehicleOwner}}</span></label>
-          </li>
-        </ul>
         <h1>List of created Vehicles</h1>
         <button type="submit" class="btn btn-primary" @click.prevent.stop="getListOfVehicles()">Refresh</button>
         <ul class="list-group">
@@ -69,7 +40,7 @@ import myMixin from '../mixins';
 
 export default {
   mixins: [myMixin],
-  name: 'CreateVehicle',
+  name: 'ProductRecall',
   data () {
     return {
       oemAddress: undefined,
@@ -112,9 +83,11 @@ export default {
       'setVehicleOwner',
       'setVehicleAddress'
     ]),
-    createVehicle() {
+    toogleRecall() {
       let {oemAddress, vehicleBuyerAddress, inputVIN, inputColor, inputNumWheels} = this;
-      VehicleFactory.methods.createVehicle(inputVIN, [1,2], inputColor, inputNumWheels, oemAddress)
+      let vehicleContract = Vehicle.clone();
+      vehicleContract.options.address = this.vehicleAddress;
+      Vehicle.methods.toggle(inputVIN, [1,2], inputColor, inputNumWheels, oemAddress)
       .send({from: ''+oemAddress, gas:5000000})
       .on('receipt', async (receipt) => {
 
@@ -131,10 +104,6 @@ export default {
           this.getListOfVehicles();
       });
     },
-    changeOwner(vehicle) {
-      this.setVehicleAddress(vehicle.addr);
-      this.$router.push({ name: 'TradeVehicle'});
-    }
   }
 }
 </script>

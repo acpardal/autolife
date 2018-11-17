@@ -10,12 +10,13 @@
           <label>Mercedes Wallet Address <span>{{oemAddress}}</span></label>
           <label>Original Vehicle Owner Address <span>{{vehicleOwnerBK}}</span></label>
           <label>Vehicle buyer Wallet Address <span>{{vehicleBuyerAddress}}</span></label>
+          <label>Vehicle Address <span>{{vehicleAddress}}</span></label>
         </div>
 
         <button type="submit" class="btn btn-primary" @click.prevent.stop="changeToOwner(vehicleBuyerAddress)">Change Owners</button>
 
         <h1>Results</h1>
-        <ul class="list-group">
+        <ul v-if="VIN" class="list-group">
           <li class="list-group-item">
             <label>Vehicle Address <span>{{vehicleAddress}}</span></label>
           </li>

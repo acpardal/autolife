@@ -2,7 +2,7 @@ pragma solidity ^0.4.23;
 import "./Vehicle.sol";
 
 contract owned {
-    constructor() { owner = msg.sender; }
+    constructor() public { owner = msg.sender; }
     address owner;
 
     modifier onlyOwner() { // Modifier
@@ -21,7 +21,7 @@ contract VehicleFactory is owned {
 
     // mapping(address => address) public _vehiclesToOwners;
     // mapping(address => address) public _ownersToVehicles;
-    address[] public _vehicles = new address[](1);
+    address[] public _vehicles = new address[](0);
 
     function createVehicle(uint VIN, uint[] vehicleParts, string color, string numWheels, address to) public onlyOwner returns (address vehicle) {
         address vehicleAdd = new Vehicle(VIN, vehicleParts, color, numWheels, to);
@@ -32,7 +32,7 @@ contract VehicleFactory is owned {
         return vehicleAdd;
     }
 
-    function getPVehicles() public view returns (address[]) { 
+    function getVehicles() public view returns (address[]) { 
         return _vehicles;
     }
 

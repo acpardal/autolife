@@ -232,6 +232,26 @@
       "0x70a515473e5f6e869d7ff8f6efc54a17c1f3e1511550d582b5f32cc788168dcd": {
         "name": "VehicleFactory",
         "address": "0xb6562aAa1894815afac3FBfca4307a754D903fB1"
+      },
+      "0xad6e0538e8fdb67377f9f7e0bec870ed1f67f3fa914bfbb38020202f1f062a32": {
+        "name": "VehicleFactory",
+        "address": "0x8c1e70e539C650f206bbD174F902631125b9923e"
+      }
+    }
+  },
+  "0x4636a0d223f5e06adab9f8030f84ff2b8119838f3eac7f8c5b935cf614d1953c": {
+    "contracts": {
+      "0xdd58ebc64de26ce6c7a64f8585754aa7a95a7581d21f75442bfa779547771d41": {
+        "name": "Vehicle",
+        "address": "0x5A09116C03072154e79eA6c5fAB8340B3f03b363"
+      },
+      "0xad6e0538e8fdb67377f9f7e0bec870ed1f67f3fa914bfbb38020202f1f062a32": {
+        "name": "VehicleFactory",
+        "address": "0x3a873dB293b17933F730492221b8AD93194FCE44"
+      },
+      "0x60086dbcfa0fc7f4e64a141fa7091c4b2f8f6f6bdd3759c3fafc5ec5ee6829d0": {
+        "name": "owned",
+        "address": "0xd3B45f085746e4D5044B49fc10017946B48BF00c"
       }
     }
   }
