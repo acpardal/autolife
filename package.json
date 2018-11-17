@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
+    "start": "npm run embarks && npm run embark",
+    "embark": "embark run",
+    "embarks": "embark simulator",
     "test": "embark test"
   },
   "author": "",

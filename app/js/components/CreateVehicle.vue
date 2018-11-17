@@ -18,7 +18,7 @@
             <label for="inputNumWheels">Number of Wheels</label>
             <input type="number" class="form-control" id="inputColor" placeholder="enter how much wheels" v-model="inputNumWheels">
           </div>
-          <button type="submit" class="btn btn-primary" @click.prevent.stop="createVehicle()">Create Vehicle</button>
+          <button type="submit" class="btn btn-primary center" @click.prevent.stop="createVehicle()">Create Vehicle</button>
         </form>
 
         <h1>Results</h1>
@@ -52,7 +52,7 @@
             <p>
               <label>Vehicle Owner <span>{{vehicle.vehicleOwner}}</span></label>
             </p>
-            <button v-if="vehicle.vehicleOwner === oemAddress" type="submit" class="btn btn-primary" @click.prevent.stop="changeOwner(vehicle)">Change Owners of this Vehicle</button>
+            <button v-if="vehicle.vehicleOwner === oemAddress" type="submit" class="btn btn-primary center" @click.prevent.stop="changeOwner(vehicle)">Change Owners of this Vehicle</button>
           </li>
         </ul>
       </div>

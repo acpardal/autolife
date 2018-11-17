@@ -12,8 +12,8 @@
           <router-link tag="a" class="nav-link" to="/recall">Product Recall</router-link>
         </li>
       </ul>
-      <div class="center">
-        <img src="./assets/logo.png"> 
+      <div class="center margin">
+        <img class="image" src="./assets/logo.png"> 
       </div>
       <router-view/>
     </div>
@@ -38,5 +38,11 @@ html, body {
 }
 .center {
   text-align: center;
+}
+.margin {
+  margin: 10px;
+}
+.image {
+  width: 50%;
 }
 </style>

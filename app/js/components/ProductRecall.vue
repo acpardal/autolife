@@ -16,7 +16,7 @@
             <p>
               <label>Recall <span>{{vehicle.recall}}</span></label>
             </p>
-            <button type="submit" class="btn btn-primary" @click="toggleRecall(vehicle)">Change Vehicle Recall</button>
+            <button type="submit" class="btn btn-primary center" @click="toggleRecall(vehicle)">Change Vehicle Recall</button>
           </li>
         </ul>
       </div>

@@ -11,7 +11,7 @@
           <label>Vehicle Address <span>{{vehicleAddress}}</span></label>
         </div>
 
-        <button type="submit" class="btn btn-primary" @click.prevent.stop="changeToOwner(vehicleBuyerAddress)">Change Owners</button>
+        <button type="submit" class="btn btn-primary center" @click.prevent.stop="changeToOwner(vehicleBuyerAddress)">Change Owners</button>
 
         <h1>Results</h1>
         <ul v-if="VIN" class="list-group">
