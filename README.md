@@ -51,3 +51,6 @@ Smart Contract VehicleFactory creates Vehicles and assigns them to an Address.
 
 Owner can transfer ownership to someone (in future should be a change of token between owner wallets).
 
+OEM Address: 0xf7e72ECF2D28edD42478EbeEEF10950F3f9acF9C
+First Buyer: 0xE3941192de7eD3a8B928FEFDe5cC1e0d42010773
+Second Buyer: 0xE3941192de7eD3a8B928FEFDe5cC1e0d42010773

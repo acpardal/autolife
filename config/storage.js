@@ -11,10 +11,11 @@ module.exports = {
     },
     dappConnection: [
       {
+        protocol: 'https',
         provider: "ipfs",
-        host: "localhost",
+        host: "ipfs.infura.io",
         port: 5001,
-        getUrl: "http://localhost:8080/ipfs/"
+        getUrl: "https://ipfs.infura.io/ipfs/"
       }
     ]
     // Configuration to start Swarm in the same terminal as `embark run`

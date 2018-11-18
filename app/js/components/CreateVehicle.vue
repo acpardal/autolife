@@ -52,7 +52,7 @@
             <p>
               <label>Vehicle Owner <span>{{vehicle.vehicleOwner}}</span></label>
             </p>
-            <button v-if="vehicle.vehicleOwner === oemAddress" type="submit" class="btn btn-primary center" @click.prevent.stop="changeOwner(vehicle)">Change Owners of this Vehicle</button>
+            <button v-if="vehicle.vehicleOwner === oemAddress" type="submit" class="btn btn-primary center" @click.prevent.stop="changeOwner(vehicle.addr, vehicleBuyerAddress)">Change Owners of this Vehicle</button>
           </li>
         </ul>
       </div>
@@ -133,25 +133,9 @@ export default {
           this.getListOfVehicles();
       });
     },
-    changeOwner(vehicle) {
-      this.$router.push({ name: 'TradeVehicle', params: { userAddress: this.oemAddress, vehicleToChange: vehicle }});
-    },
-    async testIPFS() {
-      let hash = await EmbarkJS.Storage.saveText("hello world");
-      let text = await EmbarkJS.Storage.get(hash);
-      this.ipfsTEST = text;
-    },
-    async addService(vehicle, hash) {
-      let {oemAddress} = this;
-      let vehicleContract = Vehicle.clone();
-      vehicleContract.options.address = vehicle.addr;
-      vehicleContract.methods.addService(hash)
-      .send({from: ''+vehicle.vehicleOwner, gas:5000000})
-      .on('receipt', async (receipt) => {
-        let serviceHash = receipt.events.CreateVehicle.returnValues.vehicle;
-        this.serviceHash = serviceHash
-      });
-    },
+    changeOwner(vehicleAddress, sellToAddress) {
+      this.$router.push({ name: 'TradeVehicle', params: { userAddress: this.oemAddress, vehicleToChange: vehicleAddress, sellTo: sellToAddress }});
+    }
   }
 }
 </script>

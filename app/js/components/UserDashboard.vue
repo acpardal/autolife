@@ -101,12 +101,18 @@ export default {
   methods: {
     ...mapMutations([
     ]),
-    changeOwner(vehicle, sellToAddress) {
-      this.$router.push({ name: 'TradeVehicle', params: { userAddress: this.userAddress, vehicleToChange: vehicle, sellTo: sellToAddress }});
+    changeOwner(vehicleAddress, sellToAddress) {
+      this.$router.push({ name: 'TradeVehicle', params: { 
+          userAddress: this.userAddress, 
+          vehicleToChange: vehicleAddress, 
+          sellTo: sellToAddress,
+          perspective: 'User View'
+        }
+      });
     },
     async fetchVehicleData(vehicleAddress) {
       let vehicle = await this.getVehicle(vehicleAddress);
-      this.vehicleAddress = vehicle.vehicleAddress;
+      this.vehicleAddress = vehicleAddress;
       this.VIN = vehicle.VIN
       this.color = vehicle.color
       this.numWheels = vehicle.numWheels;

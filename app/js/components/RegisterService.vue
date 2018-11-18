@@ -90,9 +90,6 @@ export default {
       'setVehicleOwner',
       'setVehicleAddress'
     ]),
-    changeOwner(vehicle) {
-      this.$router.push({ name: 'TradeVehicle', params: { userAddress: this.oemAddress, vehicleToChange: vehicle }});
-    },
     async testIPFS() {
       let hash = await EmbarkJS.Storage.saveText("hello world");
       let text = await EmbarkJS.Storage.get(hash);

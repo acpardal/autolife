@@ -2,14 +2,11 @@
 
   <div class="hello">
     <div class="container">
-      <h3 class="center">OEM View</h3>
+      <h3 class="center">{{perspective}}</h3>
       <div>
         <ul class="list-group">
           <li class="list-group-item">
             <label>Mercedes Wallet Address <span>{{userAddress}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Original Vehicle Owner Address <span>{{vehicleOwnerBK}}</span></label>
           </li>
           <li class="list-group-item">
             <label for="buyerAddress">Vehicle buyer Wallet Address</label>
@@ -50,18 +47,20 @@
 import VehicleFactory from 'Embark/contracts/VehicleFactory';
 import Vehicle from 'Embark/contracts/Vehicle';
 import { mapState, mapGetters, mapMutations } from 'vuex';
+import myMixin from '../mixins';
 
 export default {
+  mixins: [myMixin],
   name: 'TradeVehicle',
   data () {
     return {
+      perspective: undefined,
       userAddress: undefined,
       buyerAddress: undefined,
       VIN: undefined,
       vehicleAddress: undefined,
       color: undefined,
-      vehicleParts: undefined,
-      vehicleOwnerBK: undefined
+      vehicleParts: undefined
     }
   },
   computed: {
@@ -72,26 +71,23 @@ export default {
     ]),
   },
   created() {
-    if(this.vehicleOwner) {
-      this.vehicleOwnerBK = this.vehicleOwner;
-    }
-
     EmbarkJS.onReady((error) => {
       if (error) {
         console.error('Error while connecting to web3', error);
         return;
       }
-      web3.eth.getAccounts((err, accounts) => {
+      // web3.eth.getAccounts((err, accounts) => {
         // this.oemAddress = accounts[0];
-        this.buyerAddress = accounts[1];
-      });
+        // this.buyerAddress = accounts[1];
+      // });
     });
   },
   beforeRouteEnter (to, from, next) {
-    let {userAddress, vehicleToChange, sellTo} = to.params;
+    let {userAddress, vehicleToChange, sellTo, perspective} = to.params;
     next(vm => {
+      vm.perspective = perspective || 'OEM View';
       vm.userAddress = userAddress;
-      vm.vehicleAddress = vehicleToChange.addr;
+      vm.vehicleAddress = vehicleToChange;
       vm.buyerAddress = sellTo;
     });
   },
@@ -109,14 +105,12 @@ export default {
           let newVehicleOwner = receipt.events.Transfer.returnValues.to;
           this.setVehicleOwner(newVehicleOwner);
           
-          let vehicle = await getVehicle(vehicleAddress);
-          this.VIN = vehicle.VIN
-          this.vehicleAddress = vehicle.vehicleAddress
-          this.color = vehicle.color
-          this.vehicleParts = vehicle.vehicleParts
-          this.vehicleOwnerBK = vehicle.vehicleOwnerBK
+          let vehicle = await this.getVehicle(vehicleAddress);
+          this.VIN = vehicle.VIN;
+          this.vehicleAddress = vehicleAddress;
+          this.color = vehicle.color;
+          this.vehicleParts = vehicle.vehicleParts;
         });
-
     }
   }
 }
