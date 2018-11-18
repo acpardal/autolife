@@ -6,6 +6,7 @@ export default new Vuex.Store({
   state: {
     vehicleOwner: undefined,
     vehicleAddress: undefined,
+    perspective: undefined,
   },
   mutations: {
     // increment (state) {
@@ -16,7 +17,10 @@ export default new Vuex.Store({
     },
     setVehicleAddress(state, address) {
       state.vehicleAddress = address;
-    }
+    },
+    setPerspective (state, perspective){
+      state.perspective = perspective;
+    } 
   },
   getters: {
     // doneTodos: state => {

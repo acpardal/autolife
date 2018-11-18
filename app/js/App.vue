@@ -1,6 +1,10 @@
 <template>
   <div id="app">
     <div class="container">
+      <div class="center margin">
+          <img class="image" src="./assets/logo.png"> 
+          <h3 class="center"{{>perspectiv}}e</h3>
+      </div>
       <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/">Create Vehicle</router-link>
@@ -18,9 +22,6 @@
           <router-link tag="a" class="nav-link" to="/user">User DashBoard</router-link>
         </li>
       </ul>
-      <div class="center margin">
-        <img class="image" src="./assets/logo.png"> 
-      </div>
       <router-view/>
     </div>
   </div>

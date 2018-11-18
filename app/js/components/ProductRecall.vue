@@ -1,6 +1,5 @@
 <template>
   <div>
-      <h3 class="center">OEM View</h3>
       <div id="queryBalance">
         <label>Mercedes Wallet Address <span>{{oemAddress}}</span></label>
 

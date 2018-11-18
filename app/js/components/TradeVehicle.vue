@@ -2,7 +2,7 @@
 
   <div class="hello">
     <div class="container">
-      <h3 class="center">{{perspective}}</h3>
+      <!-- <h3 class="center">{{perspective}}</h3> -->
       <div>
         <ul class="list-group">
           <li class="list-group-item">
