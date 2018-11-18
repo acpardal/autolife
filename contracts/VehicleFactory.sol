@@ -19,14 +19,10 @@ contract VehicleFactory is owned {
     event CreateVehicle(address indexed to, address vehicle);
     event Transfer(address indexed from, address indexed to, address vehicle);
 
-    // mapping(address => address) public _vehiclesToOwners;
-    // mapping(address => address) public _ownersToVehicles;
     address[] public _vehicles = new address[](0);
 
     function createVehicle(uint VIN, uint[] vehicleParts, string color, string numWheels, address to) public onlyOwner returns (address vehicle) {
         address vehicleAdd = new Vehicle(VIN, vehicleParts, color, numWheels, to);
-        // _vehiclesToOwners[vehicleAdd] = to;
-        // _ownersToVehicles[to] = vehicleAdd;
         _vehicles.push(vehicleAdd);
         emit CreateVehicle(to, vehicleAdd);
         return vehicleAdd;
@@ -35,13 +31,4 @@ contract VehicleFactory is owned {
     function getVehicles() public view returns (address[]) { 
         return _vehicles;
     }
-
-    // function transfer(address to) public returns (bool ok) {
-    //     require(_ownersToVehicles[to] != address(0), "to already has a vehicle");
-    //     address vehicle = _ownersToVehicles[msg.sender];
-    //     _ownersToVehicles[msg.sender] = address(0);
-    //     _ownersToVehicles[to] = vehicle;
-    //     emit Transfer(msg.sender, to, vehicle);
-    //     return true;
-    // }
 }
