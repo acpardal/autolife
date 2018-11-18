@@ -23,6 +23,13 @@ let myMixin = {
       vehicle.numWheels = await VehicleContract.methods._numWheels().call();
       vehicle.vehicleParts = await VehicleContract.methods.getParts().call();
       vehicle.recall = await VehicleContract.methods._recall().call();
+      let length = Number(await VehicleContract.methods._servicePointerLength().call());
+      let services = [];
+      for(let i=0; i<length; i++) {
+        let service = await VehicleContract.methods._servicePointer(i).call();
+        services.push(service);
+      }
+      vehicle.vehicleServices = services;
       return vehicle;
     },
   }

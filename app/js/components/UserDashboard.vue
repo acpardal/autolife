@@ -29,7 +29,17 @@
             <label>Parts <span>{{vehicleParts}}</span></label>
           </li>
           <li class="list-group-item">
+            <label>Vehicle Recall <span>{{vehicleRecall}}</span></label>
+          </li>
+          <li class="list-group-item">
             <label>Owner wallet address <span>{{vehicleOwner}}</span></label>
+          </li>
+        </ul>
+
+        <h1>Services</h1>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <label>Vehicle Services <span>{{vehicleServices}}</span></label>
           </li>
         </ul>
         <div class="form-group">
@@ -66,7 +76,9 @@ export default {
       numWheels: undefined,
       vehicleParts: undefined,
       vehicleAddress: undefined,
-      vehicleOwner: undefined
+      vehicleOwner: undefined,
+      vehicleRecall: undefined,
+      vehicleServices: undefined
     }
   },
   computed: {
@@ -94,10 +106,17 @@ export default {
     },
     async fetchVehicleData(vehicleAddress) {
       let vehicle = await this.getVehicle(vehicleAddress);
+      this.vehicleAddress = vehicle.vehicleAddress;
       this.VIN = vehicle.VIN
-      this.vehicleAddress = vehicle.vehicleAddress
       this.color = vehicle.color
+      this.numWheels = vehicle.numWheels;
       this.vehicleParts = vehicle.vehicleParts
+      this.vehicleOwner = vehicle.vehicleOwner;
+      this.vehicleRecall = vehicle.recall;
+      this.vehicleServices = await Promise.all(vehicle.vehicleServices.map(async service => {
+        let text = await EmbarkJS.Storage.get(service);
+        return text;
+      }));
     }
   }
 }

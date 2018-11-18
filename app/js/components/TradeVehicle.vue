@@ -88,10 +88,11 @@ export default {
     });
   },
   beforeRouteEnter (to, from, next) {
-    let {userAddress, vehicleToChange} = to.params;
+    let {userAddress, vehicleToChange, sellTo} = to.params;
     next(vm => {
       vm.userAddress = userAddress;
       vm.vehicleAddress = vehicleToChange.addr;
+      vm.buyerAddress = sellTo;
     });
   },
   methods: {
