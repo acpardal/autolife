@@ -37,6 +37,13 @@
         </ul>
 
         <h1>Services</h1>
+        <form>
+          <div class="form-group">
+            <label for="inputPermissionAddress">Service Provider Address</label>
+            <input type="text" class="form-control" id="inputPermissionAddress" v-model="inputPermissionAddress">
+          </div>
+          <button type="submit" class="btn btn-primary center" @click.prevent.stop="grantPermission(inputPermissionAddress)">Grant permission to Address</button>
+        </form>
         <ul class="list-group">
           <li class="list-group-item">
             <label>Vehicle Services <span>{{vehicleServices}}</span></label>
@@ -70,6 +77,7 @@ export default {
 
       inputVehicleAddress: undefined,
       sellToAddress: undefined,
+      inputPermissionAddress: undefined,
 
       VIN: undefined,
       color: undefined,
@@ -88,6 +96,7 @@ export default {
     ]),
   },
   created() {
+    this.setPerspective('User View');
     EmbarkJS.onReady((error) => {
       if (error) {
         console.error('Error while connecting to web3', error);
@@ -100,13 +109,13 @@ export default {
   },
   methods: {
     ...mapMutations([
+      'setPerspective'
     ]),
     changeOwner(vehicleAddress, sellToAddress) {
       this.$router.push({ name: 'TradeVehicle', params: { 
           userAddress: this.userAddress, 
           vehicleToChange: vehicleAddress, 
-          sellTo: sellToAddress,
-          perspective: 'User View'
+          sellTo: sellToAddress
         }
       });
     },
@@ -123,6 +132,22 @@ export default {
         let text = await EmbarkJS.Storage.get(service);
         return text;
       }));
+    },
+    async grantPermission(providerAddress) {
+      let {vehicleAddress, userAddress} = this;
+      let vehicleContract = Vehicle.clone();
+      vehicleContract.options.address = vehicleAddress;
+      vehicleContract.methods.addPermissionToService(providerAddress)
+      .send({from: ''+userAddress, gas:5000000})
+      .on('receipt', async (receipt) => {
+          if(receipt.events.PermissionAdded.returnValues.serviceProvider) {
+            this.$notify({
+              group: 'top',
+              title: 'Permission granted',
+              text: ''
+            });
+          }
+      });
     }
   }
 }

@@ -97,6 +97,7 @@ export default {
     ]),
   },
   created() {
+    this.setPerspective('OEM View');
     EmbarkJS.onReady((error) => {
       if (error) {
         console.error('Error while connecting to web3', error);
@@ -111,7 +112,8 @@ export default {
   methods: {
     ...mapMutations([
       'setVehicleOwner',
-      'setVehicleAddress'
+      'setVehicleAddress',
+      'setPerspective'
     ]),
     createVehicle() {
       let {oemAddress, vehicleBuyerAddress, inputVIN, inputColor, inputNumWheels} = this;
@@ -128,6 +130,12 @@ export default {
           this.setVehicleOwner(vehicle.vehicleOwner);
           this.numWheels = vehicle.numWheels;
           this.vehicleParts = vehicle.vehicleParts;
+
+          this.$notify({
+            group: 'top',
+            title: 'Vehicle Created',
+            text: ''
+          });
           
           this.getListOfVehicles();
       });

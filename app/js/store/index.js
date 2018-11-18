@@ -6,7 +6,7 @@ export default new Vuex.Store({
   state: {
     vehicleOwner: undefined,
     vehicleAddress: undefined,
-    perspective: undefined,
+    perspective: 'OEM View',
   },
   mutations: {
     // increment (state) {

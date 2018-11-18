@@ -60,6 +60,7 @@ export default {
     ]),
   },
   created() {
+    this.setPerspective('OEM View');
     EmbarkJS.onReady((error) => {
       if (error) {
         console.error('Error while connecting to web3', error);
@@ -74,7 +75,8 @@ export default {
   methods: {
     ...mapMutations([
       'setVehicleOwner',
-      'setVehicleAddress'
+      'setVehicleAddress',
+      'setPerspective'
     ]),
     toggleRecall(vehicle) {
       let {oemAddress, vehicleBuyerAddress, inputVIN, inputColor, inputNumWheels} = this;
@@ -83,6 +85,11 @@ export default {
       vehicleContract.methods.toggleRecall()
       .send({from: ''+oemAddress, gas:5000000})
       .on('receipt', async (receipt) => {
+          this.$notify({
+            group: 'top',
+            title: 'Recall Changed',
+            text: ''
+          });
           this.getListOfVehicles();
       });
     },

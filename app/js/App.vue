@@ -1,9 +1,10 @@
 <template>
   <div id="app">
+    <notifications group="top" />
     <div class="container">
       <div class="center margin">
           <img class="image" src="./assets/logo.png"> 
-          <h3 class="center"{{>perspectiv}}e</h3>
+          <h3 class="center">{{perspective}}</h3>
       </div>
       <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
@@ -28,8 +29,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
-  name: 'App'
+  name: 'App',
+  computed: {
+    ...mapState([
+      'perspective'
+    ]),
+  }
 }
 </script>
 
@@ -51,5 +59,8 @@ html, body {
 }
 .image {
   width: 50%;
+}
+* {
+  font-weight: bold;
 }
 </style>

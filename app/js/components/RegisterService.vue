@@ -73,6 +73,7 @@ export default {
     ]),
   },
   created() {
+    this.setPerspective('OEM View');
     EmbarkJS.onReady((error) => {
       if (error) {
         console.error('Error while connecting to web3', error);
@@ -87,7 +88,8 @@ export default {
   methods: {
     ...mapMutations([
       'setVehicleOwner',
-      'setVehicleAddress'
+      'setVehicleAddress',
+      'setPerspective'
     ]),
     async testIPFS() {
       let hash = await EmbarkJS.Storage.saveText("hello world");
@@ -100,12 +102,25 @@ export default {
       let vehicleContract = Vehicle.clone();
       vehicleContract.options.address = vehicle.addr;
       vehicleContract.methods.addService(hash)
-      .send({from: ''+vehicle.vehicleOwner, gas:5000000})
+      .send({from: ''+oemAddress, gas:5000000})
       .on('receipt', async (receipt) => {
         let serviceHash = receipt.events.AddService.returnValues.hash;
         let text = await EmbarkJS.Storage.get(serviceHash);
         this.serviceHash = serviceHash;
         this.savedText = text;
+
+        this.$notify({
+          group: 'top',
+          title: 'Service Registered',
+          text: ''
+        });
+      })
+      .catch(err => {
+        this.$notify({
+          group: 'top',
+          title: 'Vehicle Owner needs to give Permission',
+          text: ''
+        });
       });
     },
   }

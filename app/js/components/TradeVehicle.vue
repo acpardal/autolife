@@ -54,7 +54,6 @@ export default {
   name: 'TradeVehicle',
   data () {
     return {
-      perspective: undefined,
       userAddress: undefined,
       buyerAddress: undefined,
       VIN: undefined,
@@ -83,9 +82,8 @@ export default {
     });
   },
   beforeRouteEnter (to, from, next) {
-    let {userAddress, vehicleToChange, sellTo, perspective} = to.params;
+    let {userAddress, vehicleToChange, sellTo} = to.params;
     next(vm => {
-      vm.perspective = perspective || 'OEM View';
       vm.userAddress = userAddress;
       vm.vehicleAddress = vehicleToChange;
       vm.buyerAddress = sellTo;
@@ -94,6 +92,7 @@ export default {
   methods: {
     ...mapMutations([
       'setVehicleOwner',
+      'setPerspective'
     ]),
     changeToOwner(buyerAddress) {
       let {userAddress, vehicleAddress} = this;
@@ -110,6 +109,11 @@ export default {
           this.vehicleAddress = vehicleAddress;
           this.color = vehicle.color;
           this.vehicleParts = vehicle.vehicleParts;
+          this.$notify({
+            group: 'top',
+            title: 'Owner Changed',
+            text: ''
+          });
         });
     }
   }

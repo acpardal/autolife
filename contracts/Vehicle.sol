@@ -7,6 +7,7 @@ contract Vehicle {
     address public _owner;
     bool public _recall = false;
     address public _oemAddress;
+    mapping(address => bool) public _serviceProvidersMap;
 
     mapping(uint => string) public _servicePointer;
     uint public _servicePointerLength = 0;
@@ -14,6 +15,7 @@ contract Vehicle {
     event Transfer(address indexed from, address indexed to);
     event ToggleRecall(bool actual);
     event AddService(string hash);
+    event PermissionAdded(address serviceProvider);
 
     modifier onlyOEM() {
         require(
@@ -51,8 +53,18 @@ contract Vehicle {
 
     /* IPFS HASH */
     function addService(string hash) public {
+        require(_serviceProvidersMap[msg.sender] == true, "You don't have permission");
         _servicePointer[_servicePointerLength] = hash;
         _servicePointerLength += 1;
         emit AddService(hash);
+    }
+
+    function addPermissionToService(address serviceProvider) public {
+        _serviceProvidersMap[serviceProvider] = true;
+        emit PermissionAdded(serviceProvider);
+    }
+
+    function revokePermissionToService(address serviceProvider) public {
+        _serviceProvidersMap[serviceProvider] = false;
     }
 }
