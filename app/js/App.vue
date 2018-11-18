@@ -11,6 +11,12 @@
         <li class="nav-item">
           <router-link tag="a" class="nav-link" to="/recall">Product Recall</router-link>
         </li>
+        <li class="nav-item">
+          <router-link tag="a" class="nav-link" to="/register">Register Service</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link tag="a" class="nav-link" to="/user">User DashBoard</router-link>
+        </li>
       </ul>
       <div class="center margin">
         <img class="image" src="./assets/logo.png"> 

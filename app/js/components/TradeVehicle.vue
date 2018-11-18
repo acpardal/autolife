@@ -4,14 +4,23 @@
     <div class="container">
       <h3 class="center">OEM View</h3>
       <div>
-        <div>
-          <label>Mercedes Wallet Address <span>{{oemAddress}}</span></label>
-          <label>Original Vehicle Owner Address <span>{{vehicleOwnerBK}}</span></label>
-          <label>Vehicle buyer Wallet Address <span>{{vehicleBuyerAddress}}</span></label>
-          <label>Vehicle Address <span>{{vehicleAddress}}</span></label>
-        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <label>Mercedes Wallet Address <span>{{userAddress}}</span></label>
+          </li>
+          <li class="list-group-item">
+            <label>Original Vehicle Owner Address <span>{{vehicleOwnerBK}}</span></label>
+          </li>
+          <li class="list-group-item">
+            <label for="buyerAddress">Vehicle buyer Wallet Address</label>
+            <input type="text" class="form-control" id="buyerAddress" v-model="buyerAddress">
+          </li>
+          <li class="list-group-item">
+            <label>Vehicle Address <span>{{vehicleAddress}}</span></label>
+          </li>
+        </ul>
 
-        <button type="submit" class="btn btn-primary center" @click.prevent.stop="changeToOwner(vehicleBuyerAddress)">Change Owners</button>
+        <button type="submit" class="btn btn-primary center" @click.prevent.stop="changeToOwner(buyerAddress)">Change Owners</button>
 
         <h1>Results</h1>
         <ul v-if="VIN" class="list-group">
@@ -46,10 +55,10 @@ export default {
   name: 'TradeVehicle',
   data () {
     return {
-      oemAddress: undefined,
-      vehicleBuyerAddress: undefined,
-      inputVIN: undefined,
+      userAddress: undefined,
+      buyerAddress: undefined,
       VIN: undefined,
+      vehicleAddress: undefined,
       color: undefined,
       vehicleParts: undefined,
       vehicleOwnerBK: undefined
@@ -58,7 +67,6 @@ export default {
   computed: {
     ...mapState([
       'vehicleOwner',
-      'vehicleAddress'
     ]),
     ...mapGetters([
     ]),
@@ -67,47 +75,45 @@ export default {
     if(this.vehicleOwner) {
       this.vehicleOwnerBK = this.vehicleOwner;
     }
+
     EmbarkJS.onReady((error) => {
       if (error) {
         console.error('Error while connecting to web3', error);
         return;
       }
       web3.eth.getAccounts((err, accounts) => {
-        this.oemAddress = accounts[0];
-        this.vehicleBuyerAddress = accounts[1];
+        // this.oemAddress = accounts[0];
+        this.buyerAddress = accounts[1];
       });
+    });
+  },
+  beforeRouteEnter (to, from, next) {
+    let {userAddress, vehicleToChange} = to.params;
+    next(vm => {
+      vm.userAddress = userAddress;
+      vm.vehicleAddress = vehicleToChange.addr;
     });
   },
   methods: {
     ...mapMutations([
       'setVehicleOwner',
-      'setVehicleAddress'
     ]),
     changeToOwner(buyerAddress) {
-      let {oemAddress, vehicleAddress} = this;
+      let {userAddress, vehicleAddress} = this;
       Vehicle.options.address = vehicleAddress;
       Vehicle.methods.transfer(buyerAddress)
-        .send({from: ''+oemAddress, gas:5000000})
-        .on('receipt', (receipt) => {
+        .send({from: ''+userAddress, gas:5000000})
+        .on('receipt', async (receipt) => {
 
           let newVehicleOwner = receipt.events.Transfer.returnValues.to;
           this.setVehicleOwner(newVehicleOwner);
           
-          Vehicle.methods._VIN().call().then((value) => {
-            this.VIN = value;
-          });
-          Vehicle.methods._color().call().then((value) => {
-            this.color = value;
-          });
-          Vehicle.methods._owner().call().then((value) => {
-            this.setVehicleOwner(value);
-          });
-          Vehicle.methods._numWheels().call().then((value) => {
-            this.numWheels = value;
-          });
-          Vehicle.methods._vehicleParts().call().then((value) => {
-            this.vehicleParts = value;
-          });
+          let vehicle = await getVehicle(vehicleAddress);
+          this.VIN = vehicle.VIN
+          this.vehicleAddress = vehicle.vehicleAddress
+          this.color = vehicle.color
+          this.vehicleParts = vehicle.vehicleParts
+          this.vehicleOwnerBK = vehicle.vehicleOwnerBK
         });
 
     }

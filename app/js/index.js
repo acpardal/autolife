@@ -9,6 +9,14 @@ import App from './App.vue'
 import router from './router'
 import store from './store/index'
 
+
+EmbarkJS.Storage.setProvider("ipfs", {
+  protocol: 'https',
+  host: "ipfs.infura.io",
+  port: 5001,
+  getUrl: "https://ipfs.infura.io/ipfs/"
+});
+
 /* eslint-disable no-new */
 const app = new Vue({
   el: '#container',

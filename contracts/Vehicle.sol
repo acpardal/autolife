@@ -8,8 +8,12 @@ contract Vehicle {
     bool public _recall = false;
     address public _oemAddress;
 
+    mapping(uint => string) public _servicePointer;
+    uint public _servicePointerLength = 0;
+
     event Transfer(address indexed from, address indexed to);
     event ToggleRecall(bool actual);
+    event AddService(string hash);
 
     modifier onlyOEM() {
         require(
@@ -43,5 +47,12 @@ contract Vehicle {
     function toggleRecall() public onlyOEM {
         _recall = !_recall;
         emit ToggleRecall(_recall);
+    }
+
+    /* IPFS HASH */
+    function addService(string hash) public {
+        _servicePointer[_servicePointerLength] = hash;
+        _servicePointerLength += 1;
+        emit AddService(hash);
     }
 }

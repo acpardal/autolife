@@ -72,6 +72,8 @@ export default {
   name: 'CreateVehicle',
   data () {
     return {
+      ipfsTEST: undefined,
+
       oemAddress: undefined,
       vehicleBuyerAddress: undefined,
 
@@ -132,9 +134,24 @@ export default {
       });
     },
     changeOwner(vehicle) {
-      this.setVehicleAddress(vehicle.addr);
-      this.$router.push({ name: 'TradeVehicle'});
-    }
+      this.$router.push({ name: 'TradeVehicle', params: { userAddress: this.oemAddress, vehicleToChange: vehicle }});
+    },
+    async testIPFS() {
+      let hash = await EmbarkJS.Storage.saveText("hello world");
+      let text = await EmbarkJS.Storage.get(hash);
+      this.ipfsTEST = text;
+    },
+    async addService(vehicle, hash) {
+      let {oemAddress} = this;
+      let vehicleContract = Vehicle.clone();
+      vehicleContract.options.address = vehicle.addr;
+      vehicleContract.methods.addService(hash)
+      .send({from: ''+vehicle.vehicleOwner, gas:5000000})
+      .on('receipt', async (receipt) => {
+        let serviceHash = receipt.events.CreateVehicle.returnValues.vehicle;
+        this.serviceHash = serviceHash
+      });
+    },
   }
 }
 </script>
