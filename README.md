@@ -1,4 +1,4 @@
-# AutoLife the X-Ray of your car
+# ![AutoLife](./app/js/assets/logo.png)
 
 ## License
 
