@@ -2,7 +2,6 @@
 
   <div class="hello">
     <div class="container">
-      <!-- <h3 class="center">{{perspective}}</h3> -->
       <div>
         <ul class="list-group">
           <li class="list-group-item">
@@ -75,10 +74,6 @@ export default {
         console.error('Error while connecting to web3', error);
         return;
       }
-      // web3.eth.getAccounts((err, accounts) => {
-        // this.oemAddress = accounts[0];
-        // this.buyerAddress = accounts[1];
-      // });
     });
   },
   beforeRouteEnter (to, from, next) {

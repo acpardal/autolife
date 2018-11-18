@@ -2,7 +2,6 @@
   <div>
       <div id="queryBalance">
         <label>Mercedes Wallet Address <span>{{oemAddress}}</span></label>
-        <!-- <label>Vehicle buyer Wallet Address <span>{{vehicleBuyerAddress}}</span></label> -->
 
         <form>
           <div class="form-group">

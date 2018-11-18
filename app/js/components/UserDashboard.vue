@@ -1,6 +1,5 @@
 <template>
   <div>
-      <!-- <h3 class="center">User View</h3> -->
       <div id="container">
         <label>User Wallet Address <span>{{userAddress}}</span></label>
         <form>
