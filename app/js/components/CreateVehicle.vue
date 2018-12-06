@@ -1,60 +1,69 @@
 <template>
-  <div>
-      <div id="queryBalance">
-        <label>Mercedes Wallet Address <span>{{oemAddress}}</span></label>
-
-        <form>
-          <div class="form-group">
-            <label for="inputVIN">Create Vehicle with VIN</label>
-            <input type="number" class="form-control" id="inputVIN" placeholder="enter VIN: e.g 123" v-model="inputVIN">
-          </div>
-          <div class="form-group">
-            <label for="inputColor">Color</label>
-            <input type="text" class="form-control" id="inputColor" placeholder="enter string color" v-model="inputColor">
-          </div>
-          <div class="form-group">
-            <label for="inputNumWheels">Number of Wheels</label>
-            <input type="number" class="form-control" id="inputColor" placeholder="enter how much wheels" v-model="inputNumWheels">
-          </div>
-          <button type="submit" class="btn btn-primary center" @click.prevent.stop="createVehicle()">Create Vehicle</button>
-        </form>
-
-        <h1>Results</h1>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <label>Vehicle Address <span>{{vehicleAddress}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>VIN <span>{{VIN}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Color <span>{{color}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Number of Wheels <span>{{numWheels}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Parts <span>{{vehicleParts}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Owner wallet address <span>{{vehicleOwner}}</span></label>
-          </li>
-        </ul>
-        <h1>List of created Vehicles</h1>
-        <button type="submit" class="btn btn-primary" @click.prevent.stop="getListOfVehicles()">Refresh</button>
-        <ul class="list-group">
-          <li class="list-group-item" v-for="vehicle in listOfVehicles" :key="vehicle.addr">
-            <p>
-              <label>Vehicle Address <span>{{vehicle.addr}}</span></label>
-            </p>
-            <p>
-              <label>Vehicle Owner <span>{{vehicle.vehicleOwner}}</span></label>
-            </p>
-            <button v-if="vehicle.vehicleOwner === oemAddress" type="submit" class="btn btn-primary center" @click.prevent.stop="changeOwner(vehicle.addr, vehicleBuyerAddress)">Change Owners of this Vehicle</button>
-          </li>
-        </ul>
-      </div>
-  </div>
+  <v-layout row wrap>
+    <v-flex xs12>
+      <h2>Mercedes Wallet Address <span>{{oemAddress}}</span></h2>
+      <v-form>
+        <v-text-field
+          id="inputVIN"
+          label="Create Vehicle with VIN"
+          v-model="inputVIN"
+        ></v-text-field>
+        <v-text-field
+          id="inputColor"
+          label="Color"
+          v-model="inputColor"
+        ></v-text-field>
+        <v-text-field
+          id="inputNumWheels"
+          label="Number of Wheels"
+          v-model="inputNumWheels"
+        ></v-text-field>
+        <v-btn color="success" @click="createVehicle()">Create Vehicle</v-btn>
+      </v-form>
+      <h1>Results</h1>
+      <v-list dense>
+        <v-list-tile>
+          <v-list-tile-content>Vehicle Address:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicleAddress }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>VIN:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ VIN }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>Color:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ color }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>Number of Wheels:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ numWheels }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>Parts:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicleParts }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>Owner wallet address:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicleOwner }}</v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+      <h1>List of created Vehicles</h1>
+      <v-btn color="info" @click="getListOfVehicles()">Refresh</v-btn>
+      <v-list dense v-for="vehicle in listOfVehicles" :key="vehicle.addr">
+        <v-list-tile>
+          <v-list-tile-content>Vehicle Address:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicle.addr }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>Vehicle Owner:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicle.vehicleOwner }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-action v-if="vehicle.vehicleOwner === oemAddress">
+          <v-btn color="info" @click="changeOwner(vehicle.addr, vehicleBuyerAddress)">Change Owners of this Vehicle</v-btn>
+        </v-list-action>
+      </v-list>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>

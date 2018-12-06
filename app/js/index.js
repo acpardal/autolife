@@ -9,6 +9,15 @@ import App from './App.vue'
 import router from './router'
 import store from './store/index'
 import Notifications from 'vue-notification'
+import Vuetify from 'vuetify'
+// import 'vuetify/src/stylus/app.styl'
+
+// Helpers
+import colors from 'vuetify/es5/util/colors'
+
+Vue.use(Vuetify, {
+  iconfont: 'md'
+})
 
 Vue.use(Notifications)
 

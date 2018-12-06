@@ -1,42 +1,70 @@
 <template>
-  <div id="app">
-    <notifications group="top" />
-    <div class="container">
-      <div class="center margin">
-          <img class="image" src="./assets/logo.png"> 
-          <h3 class="center">{{perspective}}</h3>
-      </div>
-      <ul class="nav nav-pills nav-fill">
-        <li class="nav-item">
-          <router-link tag="a" class="nav-link" to="/">Create Vehicle</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link tag="a" class="nav-link" to="/trade">Change Owner</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link tag="a" class="nav-link" to="/recall">Product Recall</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link tag="a" class="nav-link" to="/register">Register Service</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link tag="a" class="nav-link" to="/user">User DashBoard</router-link>
-        </li>
-      </ul>
-      <router-view/>
-    </div>
-  </div>
+  <v-app>
+    <v-navigation-drawer
+      v-model="drawer"
+      clipped
+      app
+    >
+      <v-list dense>
+        <v-list-tile
+          v-for="route in routes" 
+          :key="route.name" 
+          @click="nav(route.name)"
+          :to="{name: route.name}"
+          exact
+        >
+          <v-list-tile-action>
+            <v-icon>{{route.icon}}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{route.text}}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar app fixed clipped-left>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>
+        <img class="image" src="./assets/logo.png">
+      </v-toolbar-title>
+    </v-toolbar>
+    <v-content>
+      <v-container fluid>
+        <v-layout>
+          <v-flex>
+
+              <notifications group="top" />
+              <router-view/>
+              
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 
+import {routes} from './router/index';
+
 export default {
   name: 'App',
+  data() {
+    return {
+      drawer: null,
+      routes
+    }
+  },
   computed: {
     ...mapState([
       'perspective'
     ]),
+  },
+  methods: {
+    nav(name) {
+        this.$router.push({name});
+    }
   }
 }
 </script>
@@ -58,7 +86,7 @@ html, body {
   margin: 10px;
 }
 .image {
-  width: 50%;
+  height: 20px;
 }
 * {
   font-weight: bold;
