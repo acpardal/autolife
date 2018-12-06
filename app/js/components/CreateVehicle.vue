@@ -1,6 +1,7 @@
 <template>
   <v-layout row wrap>
     <v-flex xs12>
+
       <h2>Mercedes Wallet Address <span>{{oemAddress}}</span></h2>
       <v-form>
         <v-text-field
@@ -20,6 +21,7 @@
         ></v-text-field>
         <v-btn color="success" @click="createVehicle()">Create Vehicle</v-btn>
       </v-form>
+
       <h1>Results</h1>
       <v-list dense>
         <v-list-tile>
@@ -47,6 +49,7 @@
           <v-list-tile-content class="align-end">{{ vehicleOwner }}</v-list-tile-content>
         </v-list-tile>
       </v-list>
+
       <h1>List of created Vehicles</h1>
       <v-btn color="info" @click="getListOfVehicles()">Refresh</v-btn>
       <v-list dense v-for="vehicle in listOfVehicles" :key="vehicle.addr">
@@ -62,6 +65,7 @@
           <v-btn color="info" @click="changeOwner(vehicle.addr, vehicleBuyerAddress)">Change Owners of this Vehicle</v-btn>
         </v-list-action>
       </v-list>
+      
     </v-flex>
   </v-layout>
 </template>

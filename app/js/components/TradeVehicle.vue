@@ -1,44 +1,46 @@
 <template>
+  <v-layout row wrap>
+    <v-flex xs12>
+      
+      <h2>Mercedes Wallet Address <span>{{userAddress}}</span></h2>
+      <h2>Vehicle Address <span>{{vehicleAddress}}</span></h2>
+      <v-text-field
+        id="buyerAddress"
+        label="Vehicle buyer Wallet Address"
+        v-model="buyerAddress"
+      ></v-text-field>
+      <v-btn color="error" @click="changeToOwner(buyerAddress)()">Change Owners</v-btn>
 
-  <div class="hello">
-    <div class="container">
-      <div>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <label>Mercedes Wallet Address <span>{{userAddress}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label for="buyerAddress">Vehicle buyer Wallet Address</label>
-            <input type="text" class="form-control" id="buyerAddress" v-model="buyerAddress">
-          </li>
-          <li class="list-group-item">
-            <label>Vehicle Address <span>{{vehicleAddress}}</span></label>
-          </li>
-        </ul>
+      <h1>Results</h1>
+      <v-list dense>
+        <v-list-tile>
+          <v-list-tile-content>Vehicle Address:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicleAddress }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>VIN:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ VIN }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>Color:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ color }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>Number of Wheels:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ numWheels }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>Parts:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicleParts }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>Owner wallet address:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicleOwner }}</v-list-tile-content>
+        </v-list-tile>
+      </v-list>
 
-        <button type="submit" class="btn btn-primary center" @click.prevent.stop="changeToOwner(buyerAddress)">Change Owners</button>
-
-        <h1>Results</h1>
-        <ul v-if="VIN" class="list-group">
-          <li class="list-group-item">
-            <label>Vehicle Address <span>{{vehicleAddress}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>VIN <span>{{VIN}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Color <span>{{color}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Parts <span>{{vehicleParts}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Owner wallet address <span>{{vehicleOwner}}</span></label>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
