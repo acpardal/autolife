@@ -60,6 +60,7 @@ export default {
       VIN: undefined,
       vehicleAddress: undefined,
       color: undefined,
+      numWheels: undefined,
       vehicleParts: undefined
     }
   },
@@ -105,6 +106,7 @@ export default {
           this.VIN = vehicle.VIN;
           this.vehicleAddress = vehicleAddress;
           this.color = vehicle.color;
+          this.numWheels = vehicle.numWheels;
           this.vehicleParts = vehicle.vehicleParts;
           this.$notify({
             group: 'top',

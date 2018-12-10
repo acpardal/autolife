@@ -1,40 +1,48 @@
 <template>
-  <div>
-      <div id="queryBalance">
-        <label>Mercedes Wallet Address <span>{{oemAddress}}</span></label>
+  <v-layout row wrap>
+    <v-flex xs12>
+      <h2>Mercedes Wallet Address <span>{{oemAddress}}</span></h2>
 
-        <form>
-          <div class="form-group">
-            <label for="inputVIN">Text to register</label>
-            <textarea class="form-control" aria-label="With textarea" v-model="inputTextArea"></textarea>
-          </div>
-        </form>
+      <v-textarea
+        id="inputTextArea"
+        label="Text to register"
+        v-model="inputTextArea"
+      ></v-textarea>
 
-        <h1>List of created Vehicles</h1>
-        <button type="submit" class="btn btn-primary" @click.prevent.stop="getListOfVehicles()">Refresh</button>
-        <ul class="list-group">
-          <li class="list-group-item" v-for="vehicle in listOfVehicles" :key="vehicle.addr">
-            <p>
-              <label>Vehicle Address <span>{{vehicle.addr}}</span></label>
-            </p>
-            <p>
-              <label>Vehicle Owner <span>{{vehicle.vehicleOwner}}</span></label>
-            </p>
-            <button type="submit" class="btn btn-primary center" @click.prevent.stop="registerService(vehicle, inputTextArea)">Register Service</button>
-          </li>
-        </ul>
+      <h2>List of created Vehicles</h2>
+      <v-btn color="info" @click="getListOfVehicles()">Refresh</v-btn>
+      <v-list dense v-for="vehicle in listOfVehicles" :key="vehicle.addr">
+        <v-divider></v-divider>
+        <v-list-tile>
+          <v-list-tile-content>Vehicle Address:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicle.addr }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>Vehicle Owner:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicle.vehicleOwner }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-action>
+          <v-btn color="success" @click="registerService(vehicle, inputTextArea)">Register Service</v-btn>
+        </v-list-action>
+      </v-list>
 
-        <h1>Results</h1>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <label>Hash Saved on blockchain: <span>{{serviceHash}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Saved Text on IPFS: <span>{{savedText}}</span></label>
-          </li>
-        </ul>
-      </div>
-  </div>
+      <h2>Result</h2>
+      <v-list dense>
+        <v-list-tile>
+          <v-list-tile-content>Hash Saved on blockchain:</v-list-tile-content>
+          <v-list-tile-content class="align-end">
+            <a :href="'https://ipfs.infura.io/ipfs/'+serviceHash" target="_blank">
+              {{ serviceHash }}
+            </a>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>Saved Text on IPFS:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ savedText }}</v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>

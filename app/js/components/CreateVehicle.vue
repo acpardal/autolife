@@ -61,9 +61,9 @@
           <v-list-tile-content>Vehicle Owner:</v-list-tile-content>
           <v-list-tile-content class="align-end">{{ vehicle.vehicleOwner }}</v-list-tile-content>
         </v-list-tile>
-        <v-list-action v-if="vehicle.vehicleOwner === oemAddress">
+        <v-list-tile-action v-if="vehicle.vehicleOwner === oemAddress">
           <v-btn color="info" @click="changeOwner(vehicle.addr, vehicleBuyerAddress)">Change Owners of this Vehicle</v-btn>
-        </v-list-action>
+        </v-list-tile-action>
       </v-list>
       
     </v-flex>

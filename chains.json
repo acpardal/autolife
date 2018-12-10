@@ -502,5 +502,21 @@
         "address": "0xd8a512EBD6fd82f44dFFD968EEB0835265497d20"
       }
     }
+  },
+  "0xcd00f19224a5850c93c4ae232446707e41ba613d7c30adea81457c51fbb760e3": {
+    "contracts": {
+      "0x5ea4fd0be7c5521dcda70a98e91d20ffdf2ab8ad2ce1f4444729ae814cf12f45": {
+        "name": "Vehicle",
+        "address": "0x04D45b51fe4f00b4478F8b0719Fa779f14c8A194"
+      },
+      "0xce7c383d34e665efa48a8fc256461273508dd0e7e009c3b8c6c908f1589b06d3": {
+        "name": "VehicleFactory",
+        "address": "0x10Aa1c9C2ad79b240Dc612cd2c0c0f5513bAfF28"
+      },
+      "0x60086dbcfa0fc7f4e64a141fa7091c4b2f8f6f6bdd3759c3fafc5ec5ee6829d0": {
+        "name": "owned",
+        "address": "0xd8a512EBD6fd82f44dFFD968EEB0835265497d20"
+      }
+    }
   }
 }

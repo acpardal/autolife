@@ -1,26 +1,30 @@
 <template>
-  <div>
-      <div id="queryBalance">
-        <label>Mercedes Wallet Address <span>{{oemAddress}}</span></label>
+  <v-layout row wrap>
+    <v-flex xs12>
+      <h2>Mercedes Wallet Address <span>{{oemAddress}}</span></h2>
 
-        <h2>List of created Vehicles</h2>
-        <button type="submit" class="btn btn-primary" @click="getListOfVehicles()">Refresh</button>
-        <ul class="list-group">
-          <li class="list-group-item" v-for="vehicle in listOfVehicles" :key="vehicle.addr">
-            <p>
-              <label>Vehicle Address <span>{{vehicle.addr}}</span></label>
-            </p>
-            <p>
-              <label>Vehicle Owner <span>{{vehicle.vehicleOwner}}</span></label>
-            </p>
-            <p>
-              <label>Recall <span>{{vehicle.recall}}</span></label>
-            </p>
-            <button type="submit" class="btn btn-primary center" @click="toggleRecall(vehicle)">Change Vehicle Recall</button>
-          </li>
-        </ul>
-      </div>
-  </div>
+      <h2>List of created Vehicles</h2>
+      <v-btn color="info" @click="getListOfVehicles()">Refresh</v-btn>
+      <v-list dense v-for="vehicle in listOfVehicles" :key="vehicle.addr">
+        <v-divider></v-divider>
+        <v-list-tile>
+          <v-list-tile-content>Vehicle Address:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicle.addr }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>Vehicle Owner:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicle.vehicleOwner }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>Recall:</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicle.recall }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-action>
+          <v-btn :disabled="vehicle.vehicleOwner !== oemAddress" color="success" @click="toggleRecall(vehicle)">Change Vehicle Recall</v-btn>
+        </v-list-action>
+      </v-list>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>

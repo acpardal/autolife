@@ -1,60 +1,75 @@
 <template>
-  <div>
-      <div id="container">
-        <label>User Wallet Address <span>{{userAddress}}</span></label>
-        <form>
-          <div class="form-group">
-            <label for="inputVehicleAddress">Vehicle Address</label>
-            <input type="text" class="form-control" id="inputVehicleAddress" v-model="inputVehicleAddress">
-          </div>
-          <button type="submit" class="btn btn-primary center" @click.prevent.stop="fetchVehicleData(inputVehicleAddress)">Get Vehicle Info</button>
-        </form>
+  <v-layout row wrap>
+    <v-flex xs12>
+      <h2>User Wallet Address <span>{{userAddress}}</span></h2>
 
+        <v-text-field
+          id="inputVehicleAddress"
+          label="Vehicle Address"
+          v-model="inputVehicleAddress"
+        ></v-text-field>
+
+        <v-btn color="success" @click="fetchVehicleData()">Get Vehicle Info</v-btn>
+        
         <h1>Results</h1>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <label>Vehicle Address <span>{{vehicleAddress}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>VIN <span>{{VIN}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Color <span>{{color}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Number of Wheels <span>{{numWheels}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Parts <span>{{vehicleParts}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Vehicle Recall <span>{{vehicleRecall}}</span></label>
-          </li>
-          <li class="list-group-item">
-            <label>Owner wallet address <span>{{vehicleOwner}}</span></label>
-          </li>
-        </ul>
+        <v-list dense>
+          <v-list-tile>
+            <v-list-tile-content>Vehicle Address:</v-list-tile-content>
+            <v-list-tile-content class="align-end">{{ vehicleAddress }}</v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile>
+            <v-list-tile-content>VIN:</v-list-tile-content>
+            <v-list-tile-content class="align-end">{{ VIN }}</v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile>
+            <v-list-tile-content>Color:</v-list-tile-content>
+            <v-list-tile-content class="align-end">{{ color }}</v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile>
+            <v-list-tile-content>Number of Wheels:</v-list-tile-content>
+            <v-list-tile-content class="align-end">{{ numWheels }}</v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile>
+            <v-list-tile-content>Parts:</v-list-tile-content>
+            <v-list-tile-content class="align-end">{{ vehicleParts }}</v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile>
+            <v-list-tile-content>Vehicle Recall:</v-list-tile-content>
+            <v-list-tile-content class="align-end">{{ vehicleRecall }}</v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile>
+            <v-list-tile-content>Owner wallet address:</v-list-tile-content>
+            <v-list-tile-content class="align-end">{{ vehicleOwner }}</v-list-tile-content>
+          </v-list-tile>
+        </v-list>
 
         <h1>Services</h1>
-        <form>
-          <div class="form-group">
-            <label for="inputPermissionAddress">Service Provider Address</label>
-            <input type="text" class="form-control" id="inputPermissionAddress" v-model="inputPermissionAddress">
-          </div>
-          <button type="submit" class="btn btn-primary center" @click.prevent.stop="grantPermission(inputPermissionAddress)">Grant permission to Address</button>
-        </form>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <label>Vehicle Services <span>{{vehicleServices}}</span></label>
-          </li>
-        </ul>
-        <div class="form-group">
-          <label for="sellToAddress">Buyer Address</label>
-          <input type="text" class="form-control" id="sellToAddress" v-model="sellToAddress">
-        </div>
-        <button type="submit" class="btn btn-primary center" @click.prevent.stop="changeOwner(vehicleAddress, sellToAddress)">Sell Vehicle</button>
-      </div>
-  </div>
+        <v-form>
+          <v-text-field
+            id="inputPermissionAddress"
+            label="Service Provider Address"
+            v-model="inputPermissionAddress"
+          ></v-text-field>
+          <v-btn color="success" @click="grantPermission(inputPermissionAddress)">Grant permission to Address</v-btn>
+        </v-form>
+        <h1>Services with privileges</h1>
+        <v-list dense v-for="service in vehicleServices" :key="service">
+          <v-list-tile>
+            <v-list-tile-content>IPFS Hash:</v-list-tile-content>
+            <v-list-tile-content class="align-end">{{ service }}</v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+
+        <v-form>
+          <v-text-field
+            id="sellToAddress"
+            label="Buyer Address"
+            v-model="sellToAddress"
+          ></v-text-field>
+          <v-btn color="success" @click="changeOwner(vehicleAddress, sellToAddress)">Sell Vehicle</v-btn>
+        </v-form>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
