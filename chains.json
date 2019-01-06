@@ -518,5 +518,45 @@
         "address": "0xd8a512EBD6fd82f44dFFD968EEB0835265497d20"
       }
     }
+  },
+  "0x0f15fd0f6cebe7bb6bc8fe30481987ca0b0821bf902b731a852de411c41ed613": {
+    "contracts": {
+      "0x5ea4fd0be7c5521dcda70a98e91d20ffdf2ab8ad2ce1f4444729ae814cf12f45": {
+        "name": "Vehicle",
+        "address": "0x5A09116C03072154e79eA6c5fAB8340B3f03b363"
+      },
+      "0xce7c383d34e665efa48a8fc256461273508dd0e7e009c3b8c6c908f1589b06d3": {
+        "name": "VehicleFactory",
+        "address": "0x3a873dB293b17933F730492221b8AD93194FCE44"
+      },
+      "0x60086dbcfa0fc7f4e64a141fa7091c4b2f8f6f6bdd3759c3fafc5ec5ee6829d0": {
+        "name": "owned",
+        "address": "0xd3B45f085746e4D5044B49fc10017946B48BF00c"
+      }
+    }
+  },
+  "0xf65f07f5669024bba9bd4b6725f4e27013f7eed80a45bcaefd3a46a6734b6bdd": {
+    "contracts": {
+      "0x5ea4fd0be7c5521dcda70a98e91d20ffdf2ab8ad2ce1f4444729ae814cf12f45": {
+        "name": "Vehicle",
+        "address": "0x04D45b51fe4f00b4478F8b0719Fa779f14c8A194"
+      },
+      "0xce7c383d34e665efa48a8fc256461273508dd0e7e009c3b8c6c908f1589b06d3": {
+        "name": "VehicleFactory",
+        "address": "0x10Aa1c9C2ad79b240Dc612cd2c0c0f5513bAfF28"
+      },
+      "0x60086dbcfa0fc7f4e64a141fa7091c4b2f8f6f6bdd3759c3fafc5ec5ee6829d0": {
+        "name": "owned",
+        "address": "0xd8a512EBD6fd82f44dFFD968EEB0835265497d20"
+      },
+      "0x01326cceaea5a0fcb8740dbcf7abbc4455512c832f86975d051c201252fa7058": {
+        "name": "VehicleFactory",
+        "address": "0x494748735312D87C54Ff36E9dc71f90fb800D7Df"
+      },
+      "0xc011a4e13857c9071f8d605c91bc0d59e67df1acfe0a513ba681e9277d1e6362": {
+        "name": "VehicleFactory",
+        "address": "0xe5731c3df7a510fba6c5b2766251ce631C6B1d78"
+      }
+    }
   }
 }

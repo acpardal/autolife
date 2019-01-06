@@ -19,9 +19,7 @@
           <v-list-tile-content>Recall:</v-list-tile-content>
           <v-list-tile-content class="align-end">{{ vehicle.recall }}</v-list-tile-content>
         </v-list-tile>
-        <v-list-action>
-          <v-btn :disabled="vehicle.vehicleOwner !== oemAddress" color="success" @click="toggleRecall(vehicle)">Change Vehicle Recall</v-btn>
-        </v-list-action>
+        <v-btn color="success" @click="toggleRecall(vehicle)">Change Vehicle Recall</v-btn>
       </v-list>
     </v-flex>
   </v-layout>

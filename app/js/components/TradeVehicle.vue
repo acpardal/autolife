@@ -9,7 +9,7 @@
         label="Vehicle buyer Wallet Address"
         v-model="buyerAddress"
       ></v-text-field>
-      <v-btn color="error" @click="changeToOwner(buyerAddress)()">Change Owners</v-btn>
+      <v-btn color="error" @click="changeToOwner(buyerAddress)">Change Owners</v-btn>
 
       <h1>Results</h1>
       <v-list dense>

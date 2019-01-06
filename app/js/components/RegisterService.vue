@@ -21,9 +21,7 @@
           <v-list-tile-content>Vehicle Owner:</v-list-tile-content>
           <v-list-tile-content class="align-end">{{ vehicle.vehicleOwner }}</v-list-tile-content>
         </v-list-tile>
-        <v-list-action>
-          <v-btn color="success" @click="registerService(vehicle, inputTextArea)">Register Service</v-btn>
-        </v-list-action>
+        <v-btn color="success" @click="registerService(vehicle, inputTextArea)">Register Service</v-btn>
       </v-list>
 
       <h2>Result</h2>
@@ -41,6 +39,26 @@
           <v-list-tile-content class="align-end">{{ savedText }}</v-list-tile-content>
         </v-list-tile>
       </v-list>
+      <v-dialog
+        v-model="loader"
+        hide-overlay
+        persistent
+        width="300"
+      >
+        <v-card
+          color="primary"
+          dark
+        >
+          <v-card-text>
+            Please stand by
+            <v-progress-linear
+              indeterminate
+              color="white"
+              class="mb-0"
+            ></v-progress-linear>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
     </v-flex>
   </v-layout>
 </template>
@@ -58,6 +76,7 @@ export default {
   name: 'RegisterService',
   data () {
     return {
+      loader: false,
       ipfsTEST: undefined,
 
       oemAddress: undefined,
@@ -104,31 +123,43 @@ export default {
       this.ipfsTEST = text;
     },
     async registerService(vehicle, text) {
-      let hash = await EmbarkJS.Storage.saveText(text);
-      let {oemAddress} = this;
-      let vehicleContract = Vehicle.clone();
-      vehicleContract.options.address = vehicle.addr;
-      vehicleContract.methods.addService(hash)
-      .send({from: ''+oemAddress, gas:5000000})
-      .on('receipt', async (receipt) => {
-        let serviceHash = receipt.events.AddService.returnValues.hash;
-        let text = await EmbarkJS.Storage.get(serviceHash);
-        this.serviceHash = serviceHash;
-        this.savedText = text;
+      this.loader = true;
+      try {
+        let hash = await EmbarkJS.Storage.saveText(text);
+        let {oemAddress} = this;
+        let vehicleContract = Vehicle.clone();
+        vehicleContract.options.address = vehicle.addr;
+        vehicleContract.methods.addService(hash)
+        .send({from: ''+oemAddress, gas:5000000})
+        .on('receipt', async (receipt) => {
+          let serviceHash = receipt.events.AddService.returnValues.hash;
+          let text = await EmbarkJS.Storage.get(serviceHash);
+          this.serviceHash = serviceHash;
+          this.savedText = text;
 
+          this.loader = false;
+          this.$notify({
+            group: 'top',
+            title: 'Service Registered',
+            text: ''
+          });
+        })
+        .catch(err => {
+          this.loader = false;
+          this.$notify({
+            group: 'top',
+            title: 'Vehicle Owner needs to give Permission',
+            text: ''
+          });
+        });
+      } catch(err) {
+        this.loader = false;
         this.$notify({
           group: 'top',
-          title: 'Service Registered',
+          title: 'Error occurred',
           text: ''
         });
-      })
-      .catch(err => {
-        this.$notify({
-          group: 'top',
-          title: 'Vehicle Owner needs to give Permission',
-          text: ''
-        });
-      });
+      }
     },
   }
 }

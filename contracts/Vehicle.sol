@@ -1,4 +1,4 @@
-pragma solidity ^0.4.23;
+pragma solidity 0.4.24;
 contract Vehicle {
     uint public _VIN;
     uint[] public _vehicleParts;
