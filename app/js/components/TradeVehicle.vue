@@ -35,7 +35,10 @@
         </v-list-tile>
         <v-list-tile>
           <v-list-tile-content>Owner wallet address:</v-list-tile-content>
-          <v-list-tile-content class="align-end">{{ vehicleOwner }}</v-list-tile-content>
+          <v-list-tile-content class="align-end">
+            <v-list-tile-title>{{ vehicleOwner }}</v-list-tile-title>
+            <v-list-tile-sub-title>{{ getAccount({publicKey: vehicleOwner}).name }}</v-list-tile-sub-title>
+          </v-list-tile-content>
         </v-list-tile>
       </v-list>
 
@@ -49,9 +52,10 @@ import VehicleFactory from 'Embark/contracts/VehicleFactory';
 import Vehicle from 'Embark/contracts/Vehicle';
 import { mapState, mapGetters, mapMutations } from 'vuex';
 import myMixin from '../mixins';
+import { accounts } from '../mixins';
 
 export default {
-  mixins: [myMixin],
+  mixins: [myMixin, accounts],
   name: 'TradeVehicle',
   data () {
     return {

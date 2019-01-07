@@ -558,5 +558,21 @@
         "address": "0xe5731c3df7a510fba6c5b2766251ce631C6B1d78"
       }
     }
+  },
+  "0x393ce146fdc06ab0c5e91e34aa8a244e6a510fa328f05549fbb50bf146f5b7d6": {
+    "contracts": {
+      "0x5ea4fd0be7c5521dcda70a98e91d20ffdf2ab8ad2ce1f4444729ae814cf12f45": {
+        "name": "Vehicle",
+        "address": "0x04D45b51fe4f00b4478F8b0719Fa779f14c8A194"
+      },
+      "0xc011a4e13857c9071f8d605c91bc0d59e67df1acfe0a513ba681e9277d1e6362": {
+        "name": "VehicleFactory",
+        "address": "0x10Aa1c9C2ad79b240Dc612cd2c0c0f5513bAfF28"
+      },
+      "0x60086dbcfa0fc7f4e64a141fa7091c4b2f8f6f6bdd3759c3fafc5ec5ee6829d0": {
+        "name": "owned",
+        "address": "0xd8a512EBD6fd82f44dFFD968EEB0835265497d20"
+      }
+    }
   }
 }

@@ -3,13 +3,15 @@
     <v-flex xs12>
       <h2>User Wallet Address <span>{{userAddress}}</span></h2>
 
-        <v-text-field
-          id="inputVehicleAddress"
-          label="Vehicle Address"
+        <v-select
           v-model="inputVehicleAddress"
-        ></v-text-field>
+          :items="listOfVehicles"
+          item-text="addr"
+          item-value="addr"
+          label="Vehicle Address"
+        ></v-select>
 
-        <v-btn color="success" @click="fetchVehicleData()">Get Vehicle Info</v-btn>
+        <v-btn color="success" @click="fetchVehicleData(inputVehicleAddress)">Get Vehicle Info</v-btn>
         
         <h1>Results</h1>
         <v-list dense>
@@ -39,7 +41,10 @@
           </v-list-tile>
           <v-list-tile>
             <v-list-tile-content>Owner wallet address:</v-list-tile-content>
-            <v-list-tile-content class="align-end">{{ vehicleOwner }}</v-list-tile-content>
+            <v-list-tile-content class="align-end">
+            <v-list-tile-title>{{ vehicleOwner }}</v-list-tile-title>
+            <v-list-tile-sub-title>{{ getAccount({publicKey: vehicleOwner}).name }}</v-list-tile-sub-title>
+          </v-list-tile-content>
           </v-list-tile>
         </v-list>
 
@@ -79,9 +84,10 @@ import Vehicle from 'Embark/contracts/Vehicle';
 
 import { mapState, mapGetters, mapMutations } from 'vuex';
 import myMixin from '../mixins';
+import { accounts } from '../mixins';
 
 export default {
-  mixins: [myMixin],
+  mixins: [myMixin, accounts],
   name: 'UserDashboard',
   data () {
     return {
@@ -119,6 +125,7 @@ export default {
       web3.eth.getAccounts(async (err, accounts) => {
         this.userAddress = accounts[1];
       });
+      this.getListOfVehicles()
     });
   },
   methods: {

@@ -1,6 +1,11 @@
 import VehicleFactory from 'Embark/contracts/VehicleFactory';
 import Vehicle from 'Embark/contracts/Vehicle';
 let myMixin = {
+  data() {
+    return {
+      listOfVehicles: []
+    }
+  },
   methods: {
     async getListOfVehicles() {
       let vehiclesAddr = await VehicleFactory.methods.getVehicles().call();
@@ -36,3 +41,49 @@ let myMixin = {
 }
 
 export default myMixin;
+
+let accounts = {
+  data() {
+    return {
+      accounts: []
+    }
+  },
+  created() {
+    EmbarkJS.onReady((error) => {
+      if (error) {
+        console.error('Error while connecting to web3', error);
+        return;
+      }
+      web3.eth.getAccounts((err, accounts) => {
+        this.accounts = [{
+          name: 'Mercedes',
+          publicKey: accounts[0]
+        },
+        {
+          name: 'André Pardal',
+          publicKey: accounts[1]
+        },
+        {
+          name: 'Sebastião Barata',
+          publicKey: accounts[2]
+        }]
+      });
+    });
+  },
+  methods: {
+    getAccount(account) {
+      let result = {}
+      if(account && account.name) {
+        return this.accounts.find(acc => acc.name == account.name) || {}
+      }
+      if(account && account.publicKey) {
+        return this.accounts.find(acc => acc.publicKey == account.publicKey) || {}
+      }
+      return result;
+    }
+  }
+}
+
+export {
+  accounts
+}

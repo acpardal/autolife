@@ -26,7 +26,8 @@
       <v-list dense>
         <v-list-tile>
           <v-list-tile-content>Vehicle Address:</v-list-tile-content>
-          <v-list-tile-content class="align-end">{{ vehicleAddress }}</v-list-tile-content>
+          <v-list-tile-content class="align-end">{{ vehicleAddress }}
+          </v-list-tile-content>
         </v-list-tile>
         <v-list-tile>
           <v-list-tile-content>VIN:</v-list-tile-content>
@@ -46,7 +47,10 @@
         </v-list-tile>
         <v-list-tile>
           <v-list-tile-content>Owner wallet address:</v-list-tile-content>
-          <v-list-tile-content class="align-end">{{ vehicleOwner }}</v-list-tile-content>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ vehicleOwner }}</v-list-tile-title>
+            <v-list-tile-sub-title>{{ getAccount({publicKey: vehicleOwner}).name }}</v-list-tile-sub-title>
+          </v-list-tile-content>
         </v-list-tile>
       </v-list>
 
@@ -59,7 +63,10 @@
         </v-list-tile>
         <v-list-tile>
           <v-list-tile-content>Vehicle Owner:</v-list-tile-content>
-          <v-list-tile-content class="align-end">{{ vehicle.vehicleOwner }}</v-list-tile-content>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ vehicle.vehicleOwner }}</v-list-tile-title>
+            <v-list-tile-sub-title>{{ getAccount({publicKey: vehicle.vehicleOwner}).name }}</v-list-tile-sub-title>
+          </v-list-tile-content>
         </v-list-tile>
         <v-btn :disabled="vehicle.vehicleOwner !== oemAddress" color="info" @click="changeOwner(vehicle.addr, vehicleBuyerAddress)">Change Owners of this Vehicle</v-btn>
       </v-list>
@@ -75,9 +82,10 @@ import Vehicle from 'Embark/contracts/Vehicle';
 
 import { mapState, mapGetters, mapMutations } from 'vuex';
 import myMixin from '../mixins';
+import { accounts } from '../mixins';
 
 export default {
-  mixins: [myMixin],
+  mixins: [myMixin, accounts],
   name: 'CreateVehicle',
   data () {
     return {
